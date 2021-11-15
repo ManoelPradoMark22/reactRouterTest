@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// This is a React Router v6 app
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
-function App() {
+import { Qrcode } from './pages/Qrcode';
+import { SearchParams } from './pages/SearchParams';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<h2>Inicio</h2>} />
+        <Route path="users/*" element={<Users />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
+function Users() {
+  return (
+    <div>
+      <nav>
+        <Link to="me">My Profile</Link>
+      </nav>
+
+      <Routes>
+        <Route path=":id" element={<Qrcode/>} />
+        <Route path="me" element={<SearchParams/>} />
+      </Routes>
+    </div>
+  );
+}
